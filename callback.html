@@ -8,7 +8,17 @@
 </head>
 <body>
 <h1>Studio Kola</h1>
-<p>Authorization received. Copy the full address of this page and paste it into the Studio Kola window on your computer, then close this page.</p>
+<p id="msg">Authorization received. Sending it to Studio Kola on this computer…</p>
 <p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
+<script>
+// Hands the authorization code to the Studio Kola program running on this same computer (local address only).
+if (location.search.indexOf("code=") !== -1) {
+  setTimeout(function () { location.replace("http://127.0.0.1:8765/callback" + location.search); }, 800);
+  setTimeout(function () {
+    document.getElementById("msg").textContent =
+      "If nothing happens, copy the full address of this page (Ctrl+A, Ctrl+C in the address bar): Studio Kola will detect it.";
+  }, 4000);
+}
+</script>
 </body>
 </html>
